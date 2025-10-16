@@ -6,6 +6,13 @@
       <label>Customer Name:</label>
       <input type="text" formControlName="customerName" placeholder="Enter name" />
     </div>
+    <div>
+      <label>Mobile Number:</label>
+      <input type="text" formControlName="mobileNumber" maxlength="10" placeholder="Enter mobile number" />
+      <div *ngIf="submitted && billingForm.get('mobileNumber')?.invalid" class="error">
+        Valid mobile number is required
+      </div>
+    </div>
 
     <div formArrayName="items">
       <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="item-row">
@@ -51,6 +58,7 @@
       <div>
         <h3>Receipt No: {{ receiptNo }}</h3>
         <p><strong>Customer:</strong> {{ billingForm.value.customerName }}</p>
+        <p><strong>Mobile:</strong> {{ billingForm.value.mobileNumber }}</p>
       </div>
     </div>
 
