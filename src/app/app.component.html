@@ -58,311 +58,214 @@
 
 
 <div>
-<div class="form-container">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <!-- ================= Education Details ================= -->
-    <div formGroupName="education" class="section">
-      <h2>Educational Details</h2>
+<div class="form-container" [formGroup]="form">
+  <h2>Applicant Details</h2>
 
-      <label>
-        Name of the Institute <span class="required">*</span>
-        <input formControlName="instituteName" />
-      </label>
-      <div *ngIf="hasError('education.instituteName', 'required')" class="error">
-        Institute name is required.
-      </div>
+  <label>PAN Card:</label>
+  <input formControlName="panCard" />
+  <div *ngIf="hasError('panCard', 'required')" class="error">PAN Card is required.</div>
+  <div *ngIf="hasError('panCard', 'pattern')" class="error">Enter valid PAN (ABCDE1234F).</div>
 
+  <hr />
+
+  <!-- EDUCATION -->
+  <h3>Educational Details</h3>
+  <label>Do you have educational details?</label>
+  <label><input type="radio" formControlName="hasEducation" value="yes" /> Yes</label>
+  <label><input type="radio" formControlName="hasEducation" value="no" /> No</label>
+  <div *ngIf="hasError('hasEducation', 'required')" class="error">Please select Yes or No.</div>
+
+  <div *ngIf="form.get('hasEducation')?.value === 'yes'" formGroupName="education">
+    <label>Institute Name:</label>
+    <input formControlName="instituteName" />
+    <div *ngIf="hasError('education.instituteName', 'required')" class="error">Required.</div>
+
+    <div formGroupName="address">
       <h4>Address</h4>
-      <div formGroupName="address" class="address-grid">
-        <label>
-          Street Line 1 <span class="required">*</span>
-          <input formControlName="street1" />
-        </label>
-        <div *ngIf="hasError('education.address.street1', 'required')" class="error">
-          Street line 1 is required.
-        </div>
+      <label>Street Line 1:</label>
+      <input formControlName="street1" />
+      <div *ngIf="hasError('education.address.street1', 'required')" class="error">Required.</div>
 
-        <label>
-          Street Line 2
-          <input formControlName="street2" />
-        </label>
+      <label>Street Line 2:</label>
+      <input formControlName="street2" />
 
-        <label>
-          City <span class="required">*</span>
-          <input formControlName="city" />
-        </label>
-        <div *ngIf="hasError('education.address.city', 'required')" class="error">
-          City is required.
-        </div>
+      <label>City:</label>
+      <input formControlName="city" />
+      <div *ngIf="hasError('education.address.city', 'required')" class="error">Required.</div>
 
-        <label>
-          State <span class="required">*</span>
-          <input formControlName="state" />
-        </label>
-        <div *ngIf="hasError('education.address.state', 'required')" class="error">
-          State is required.
-        </div>
+      <label>State:</label>
+      <input formControlName="state" />
+      <div *ngIf="hasError('education.address.state', 'required')" class="error">Required.</div>
 
-        <label>
-          Pincode <span class="required">*</span>
-          <input formControlName="pincode" />
-        </label>
-        <div *ngIf="hasError('education.address.pincode', 'required')" class="error">
-          Pincode is required.
-        </div>
-        <div *ngIf="hasError('education.address.pincode', 'pattern')" class="error">
-          Enter a valid 6-digit pincode.
-        </div>
-      </div>
-
-      <label>
-        Course Name <span class="required">*</span>
-        <input formControlName="courseName" />
-      </label>
-      <div *ngIf="hasError('education.courseName', 'required')" class="error">
-        Course name is required.
-      </div>
-
-      <label>
-        Start Date <span class="required">*</span>
-        <input type="date" formControlName="startDate" />
-      </label>
-      <div *ngIf="hasError('education.startDate', 'required')" class="error">
-        Start date is required.
-      </div>
-
-      <label>
-        End Date <span class="required">*</span>
-        <input type="date" formControlName="endDate" />
-      </label>
-      <div *ngIf="hasError('education.endDate', 'required')" class="error">
-        End date is required.
-      </div>
+      <label>Pincode:</label>
+      <input formControlName="pincode" />
+      <div *ngIf="hasError('education.address.pincode', 'required')" class="error">Required.</div>
+      <div *ngIf="hasError('education.address.pincode', 'pattern')" class="error">Invalid pincode.</div>
     </div>
 
-    <!-- ================= Employer Details ================= -->
-    <div formGroupName="employer" class="section">
-      <h2>Employer Details</h2>
+    <label>Course Name:</label>
+    <input formControlName="courseName" />
+    <div *ngIf="hasError('education.courseName', 'required')" class="error">Required.</div>
 
-      <label>
-        Company Name <span class="required">*</span>
-        <input formControlName="companyName" />
-      </label>
-      <div *ngIf="hasError('employer.companyName', 'required')" class="error">
-        Company name is required.
-      </div>
+    <label>Start Date:</label>
+    <input type="date" formControlName="startDate" />
+    <div *ngIf="hasError('education.startDate', 'required')" class="error">Required.</div>
 
+    <label>End Date:</label>
+    <input type="date" formControlName="endDate" />
+    <div *ngIf="hasError('education.endDate', 'required')" class="error">Required.</div>
+  </div>
+
+  <div *ngIf="form.get('hasEducation')?.value === 'no'">
+    <label>Please explain:</label>
+    <textarea formControlName="description"></textarea>
+  </div>
+
+  <hr />
+
+  <!-- EMPLOYMENT -->
+  <h3>Employer Details</h3>
+  <label>Do you have employment details?</label>
+  <label><input type="radio" formControlName="hasEmployment" value="yes" /> Yes</label>
+  <label><input type="radio" formControlName="hasEmployment" value="no" /> No</label>
+  <div *ngIf="hasError('hasEmployment', 'required')" class="error">Please select Yes or No.</div>
+
+  <div *ngIf="form.get('hasEmployment')?.value === 'yes'" formGroupName="employer">
+    <label>Company Name:</label>
+    <input formControlName="companyName" />
+    <div *ngIf="hasError('employer.companyName', 'required')" class="error">Required.</div>
+
+    <div formGroupName="address">
       <h4>Address</h4>
-      <div formGroupName="address" class="address-grid">
-        <label>
-          Street Line 1 <span class="required">*</span>
-          <input formControlName="street1" />
-        </label>
-        <div *ngIf="hasError('employer.address.street1', 'required')" class="error">
-          Street line 1 is required.
-        </div>
+      <label>Street Line 1:</label>
+      <input formControlName="street1" />
+      <div *ngIf="hasError('employer.address.street1', 'required')" class="error">Required.</div>
 
-        <label>
-          Street Line 2
-          <input formControlName="street2" />
-        </label>
+      <label>Street Line 2:</label>
+      <input formControlName="street2" />
 
-        <label>
-          City <span class="required">*</span>
-          <input formControlName="city" />
-        </label>
-        <div *ngIf="hasError('employer.address.city', 'required')" class="error">
-          City is required.
-        </div>
+      <label>City:</label>
+      <input formControlName="city" />
+      <div *ngIf="hasError('employer.address.city', 'required')" class="error">Required.</div>
 
-        <label>
-          State <span class="required">*</span>
-          <input formControlName="state" />
-        </label>
-        <div *ngIf="hasError('employer.address.state', 'required')" class="error">
-          State is required.
-        </div>
+      <label>State:</label>
+      <input formControlName="state" />
+      <div *ngIf="hasError('employer.address.state', 'required')" class="error">Required.</div>
 
-        <label>
-          Pincode <span class="required">*</span>
-          <input formControlName="pincode" />
-        </label>
-        <div *ngIf="hasError('employer.address.pincode', 'required')" class="error">
-          Pincode is required.
-        </div>
-        <div *ngIf="hasError('employer.address.pincode', 'pattern')" class="error">
-          Enter a valid 6-digit pincode.
-        </div>
-      </div>
-
-      <label>
-        Start Date <span class="required">*</span>
-        <input type="date" formControlName="startDate" />
-      </label>
-      <div *ngIf="hasError('employer.startDate', 'required')" class="error">
-        Start date is required.
-      </div>
-
-      <label>
-        End Date <span class="required">*</span>
-        <input type="date" formControlName="endDate" />
-      </label>
-      <div *ngIf="hasError('employer.endDate', 'required')" class="error">
-        End date is required.
-      </div>
-
-      <label>
-        Salary <span class="required">*</span>
-        <input type="number" formControlName="salary" />
-      </label>
-      <div *ngIf="hasError('employer.salary', 'required')" class="error">
-        Salary is required.
-      </div>
-
-      <label>
-        Job Title <span class="required">*</span>
-        <input formControlName="jobTitle" />
-      </label>
-      <div *ngIf="hasError('employer.jobTitle', 'required')" class="error">
-        Job title is required.
-      </div>
-
-      <label>
-        Job Description <span class="required">*</span>
-        <textarea formControlName="jobDescription"></textarea>
-      </label>
-      <div *ngIf="hasError('employer.jobDescription', 'required')" class="error">
-        Job description is required.
-      </div>
-
-      <label>
-        Work Phone Number <span class="required">*</span>
-        <input formControlName="workPhone" />
-      </label>
-      <div *ngIf="hasError('employer.workPhone', 'required')" class="error">
-        Work phone number is required.
-      </div>
-      <div *ngIf="hasError('employer.workPhone', 'pattern')" class="error">
-        Enter a valid 10-digit phone number.
-      </div>
+      <label>Pincode:</label>
+      <input formControlName="pincode" />
+      <div *ngIf="hasError('employer.address.pincode', 'required')" class="error">Required.</div>
+      <div *ngIf="hasError('employer.address.pincode', 'pattern')" class="error">Invalid pincode.</div>
     </div>
 
-    <!-- ================= Previous Employer ================= -->
-    <div formGroupName="previousEmployer" class="section">
-      <h2>Previous Employer Details</h2>
+    <label>Start Date:</label>
+    <input type="date" formControlName="startDate" />
+    <div *ngIf="hasError('employer.startDate', 'required')" class="error">Required.</div>
 
-      <label>
-        Company Name <span class="required">*</span>
-        <input formControlName="companyName" />
-      </label>
-      <div *ngIf="hasError('previousEmployer.companyName', 'required')" class="error">
-        Company name is required.
-      </div>
+    <label>End Date:</label>
+    <input type="date" formControlName="endDate" />
+    <div *ngIf="hasError('employer.endDate', 'required')" class="error">Required.</div>
 
+    <label>Salary:</label>
+    <input type="number" formControlName="salary" />
+    <div *ngIf="hasError('employer.salary', 'required')" class="error">Required.</div>
+
+    <label>Job Title:</label>
+    <input formControlName="jobTitle" />
+    <div *ngIf="hasError('employer.jobTitle', 'required')" class="error">Required.</div>
+
+    <label>Job Description:</label>
+    <textarea formControlName="jobDescription"></textarea>
+    <div *ngIf="hasError('employer.jobDescription', 'required')" class="error">Required.</div>
+
+    <label>Work Phone:</label>
+    <input formControlName="workPhone" />
+    <div *ngIf="hasError('employer.workPhone', 'required')" class="error">Required.</div>
+    <div *ngIf="hasError('employer.workPhone', 'pattern')" class="error">Must be 10 digits.</div>
+  </div>
+
+  <div *ngIf="form.get('hasEmployment')?.value === 'no'">
+    <label>Please explain:</label>
+    <textarea formControlName="description"></textarea>
+  </div>
+
+  <hr />
+
+  <!-- PREVIOUS EMPLOYER -->
+  <h3>Previous Employer Details</h3>
+  <label>Do you have previous employment details?</label>
+  <label><input type="radio" formControlName="hasPreviousEmployment" value="yes" /> Yes</label>
+  <label><input type="radio" formControlName="hasPreviousEmployment" value="no" /> No</label>
+  <div *ngIf="hasError('hasPreviousEmployment', 'required')" class="error">Please select Yes or No.</div>
+
+  <div *ngIf="form.get('hasPreviousEmployment')?.value === 'yes'" formGroupName="previousEmployer">
+    <label>Company Name:</label>
+    <input formControlName="companyName" />
+    <div *ngIf="hasError('previousEmployer.companyName', 'required')" class="error">Required.</div>
+
+    <div formGroupName="address">
       <h4>Address</h4>
-      <div formGroupName="address" class="address-grid">
-        <label>
-          Street Line 1 <span class="required">*</span>
-          <input formControlName="street1" />
-        </label>
-        <div *ngIf="hasError('previousEmployer.address.street1', 'required')" class="error">
-          Street line 1 is required.
-        </div>
+      <label>Street Line 1:</label>
+      <input formControlName="street1" />
+      <div *ngIf="hasError('previousEmployer.address.street1', 'required')" class="error">Required.</div>
 
-        <label>
-          Street Line 2
-          <input formControlName="street2" />
-        </label>
+      <label>Street Line 2:</label>
+      <input formControlName="street2" />
 
-        <label>
-          City <span class="required">*</span>
-          <input formControlName="city" />
-        </label>
-        <div *ngIf="hasError('previousEmployer.address.city', 'required')" class="error">
-          City is required.
-        </div>
+      <label>City:</label>
+      <input formControlName="city" />
+      <div *ngIf="hasError('previousEmployer.address.city', 'required')" class="error">Required.</div>
 
-        <label>
-          State <span class="required">*</span>
-          <input formControlName="state" />
-        </label>
-        <div *ngIf="hasError('previousEmployer.address.state', 'required')" class="error">
-          State is required.
-        </div>
+      <label>State:</label>
+      <input formControlName="state" />
+      <div *ngIf="hasError('previousEmployer.address.state', 'required')" class="error">Required.</div>
 
-        <label>
-          Pincode <span class="required">*</span>
-          <input formControlName="pincode" />
-        </label>
-        <div *ngIf="hasError('previousEmployer.address.pincode', 'required')" class="error">
-          Pincode is required.
-        </div>
-        <div *ngIf="hasError('previousEmployer.address.pincode', 'pattern')" class="error">
-          Enter a valid 6-digit pincode.
-        </div>
-      </div>
-
-      <label>
-        Start Date <span class="required">*</span>
-        <input type="date" formControlName="startDate" />
-      </label>
-      <div *ngIf="hasError('previousEmployer.startDate', 'required')" class="error">
-        Start date is required.
-      </div>
-
-      <label>
-        End Date <span class="required">*</span>
-        <input type="date" formControlName="endDate" />
-      </label>
-      <div *ngIf="hasError('previousEmployer.endDate', 'required')" class="error">
-        End date is required.
-      </div>
-
-      <label>
-        Job Title <span class="required">*</span>
-        <input formControlName="jobTitle" />
-      </label>
-      <div *ngIf="hasError('previousEmployer.jobTitle', 'required')" class="error">
-        Job title is required.
-      </div>
-
-      <label>
-        Job Description <span class="required">*</span>
-        <textarea formControlName="jobDescription"></textarea>
-      </label>
-      <div *ngIf="hasError('previousEmployer.jobDescription', 'required')" class="error">
-        Job description is required.
-      </div>
-
-      <label>
-        Company Contact No <span class="required">*</span>
-        <input formControlName="contactNo" />
-      </label>
-      <div *ngIf="hasError('previousEmployer.contactNo', 'required')" class="error">
-        Contact number is required.
-      </div>
-      <div *ngIf="hasError('previousEmployer.contactNo', 'pattern')" class="error">
-        Enter a valid 10-digit contact number.
-      </div>
-
-      <label>
-        Supervisor Name
-        <input formControlName="supervisorName" />
-      </label>
+      <label>Pincode:</label>
+      <input formControlName="pincode" />
+      <div *ngIf="hasError('previousEmployer.address.pincode', 'required')" class="error">Required.</div>
+      <div *ngIf="hasError('previousEmployer.address.pincode', 'pattern')" class="error">Invalid pincode.</div>
     </div>
 
-    <button type="submit">Submit</button>
-    <hr>
-    <button type="button" (click)="onReset()">Reset</button>
-  </form>
-</div>
-<div *ngIf="formData" class="result-section">
-    <h2>Submitted Form Details</h2>
-    <pre>{{ formData | json }}</pre>
+    <label>Start Date:</label>
+    <input type="date" formControlName="startDate" />
+    <div *ngIf="hasError('previousEmployer.startDate', 'required')" class="error">Required.</div>
+
+    <label>End Date:</label>
+    <input type="date" formControlName="endDate" />
+    <div *ngIf="hasError('previousEmployer.endDate', 'required')" class="error">Required.</div>
+
+    <label>Job Title:</label>
+    <input formControlName="jobTitle" />
+    <div *ngIf="hasError('previousEmployer.jobTitle', 'required')" class="error">Required.</div>
+
+    <label>Job Description:</label>
+    <textarea formControlName="jobDescription"></textarea>
+    <div *ngIf="hasError('previousEmployer.jobDescription', 'required')" class="error">Required.</div>
+
+    <label>Company Contact No:</label>
+    <input formControlName="contactNo" />
+    <div *ngIf="hasError('previousEmployer.contactNo', 'required')" class="error">Required.</div>
+    <div *ngIf="hasError('previousEmployer.contactNo', 'pattern')" class="error">Must be 10 digits.</div>
+
+    <label>Supervisor Name:</label>
+    <input formControlName="supervisorName" />
+  </div>
+
+  <div *ngIf="form.get('hasPreviousEmployment')?.value === 'no'">
+    <label>Please explain:</label>
+    <textarea formControlName="description"></textarea>
+  </div>
+
+  <hr />
+
+  <button (click)="onSubmit()">Submit</button>
+
+  <div *ngIf="showSummary" class="summary">
+    <h3>Application Summary</h3>
+    <pre>{{ form.value | json }}</pre>
+  </div>
 </div>
 
-
-  
 </div>
 
 
