@@ -273,20 +273,20 @@
 </form>
 
 <!-- SUMMARY TABLE -->
-<div *ngIf="submitted" class="summary-section">
-  <h2>Application Summary</h2>
+<!-- <div *ngIf="submitted" class="summary-section">
+  <h2>Application Summary</h2> -->
 
   <!-- PAN -->
-  <table class="summary-table">
+  <!-- <table class="summary-table">
     <tr><th colspan="2">Applicant Information</th></tr>
     <tr>
       <td>PAN Number</td>
       <td>{{ mainForm.value.pan }}</td>
     </tr>
   </table>
-
+ -->
   <!-- EDUCATION -->
-  <table class="summary-table" *ngIf="mainForm.value.hasEducation === 'yes'">
+  <!-- <table class="summary-table" *ngIf="mainForm.value.hasEducation === 'yes'">
     <tr><th colspan="2">Educational Details</th></tr>
     <tr><td>Institute Name</td><td>{{ mainForm.value.educationDetails.instituteName }}</td></tr>
     <tr><td>Street Line 1</td><td>{{ mainForm.value.educationDetails.street1 }}</td></tr>
@@ -297,19 +297,19 @@
     <tr><td>Course Name</td><td>{{ mainForm.value.educationDetails.courseName }}</td></tr>
     <tr><td>Start Date</td><td>{{ mainForm.value.educationDetails.startDate }}</td></tr>
     <tr><td>End Date</td><td>{{ mainForm.value.educationDetails.endDate }}</td></tr>
-  </table>
+  </table> -->
 
   <!-- When EDUCATION = NO -->
-  <table class="summary-table" *ngIf="mainForm.value.hasEducation === 'no'">
+  <!-- <table class="summary-table" *ngIf="mainForm.value.hasEducation === 'no'">
     <tr><th colspan="2">Educational Details</th></tr>
     <tr>
       <td>Description</td>
       <td>{{ mainForm.value.educationDescription }}</td>
     </tr>
-  </table>
+  </table> -->
 
   <!-- EMPLOYMENT -->
-  <table class="summary-table" *ngIf="mainForm.value.hasEmployment === 'yes'">
+  <!-- <table class="summary-table" *ngIf="mainForm.value.hasEmployment === 'yes'">
     <tr><th colspan="2">Employment Details</th></tr>
     <tr><td>Company Name</td><td>{{ mainForm.value.employer.companyName }}</td></tr>
     <tr><td>Street Line 1</td><td>{{ mainForm.value.employer.companyAddress.street1 }}</td></tr>
@@ -321,19 +321,19 @@
     <tr><td>Job Title</td><td>{{ mainForm.value.employer.jobTitle }}</td></tr>
     <tr><td>Job Description</td><td>{{ mainForm.value.employer.jobDescription }}</td></tr>
     <tr><td>Work Phone</td><td>{{ mainForm.value.employer.workPhone }}</td></tr>
-  </table>
+  </table> -->
 
   <!-- When EMPLOYMENT = NO -->
-  <table class="summary-table" *ngIf="mainForm.value.hasEmployment === 'no'">
+  <!-- <table class="summary-table" *ngIf="mainForm.value.hasEmployment === 'no'">
     <tr><th colspan="2">Employment Details</th></tr>
     <tr>
       <td>Description</td>
       <td>{{ mainForm.value.employmentDescription }}</td>
     </tr>
-  </table>
+  </table> -->
 
   <!-- PREVIOUS EMPLOYMENT -->
-  <table class="summary-table" *ngIf="mainForm.value.hasPrevEmployment === 'yes'">
+  <!-- <table class="summary-table" *ngIf="mainForm.value.hasPrevEmployment === 'yes'">
     <tr><th colspan="2">Previous Employment Details</th></tr>
     <tr><td>Company Name</td><td>{{ mainForm.value.previousEmployer.companyName }}</td></tr>
     <tr><td>Street Line 1</td><td>{{ mainForm.value.previousEmployer.companyAddress.street1 }}</td></tr>
@@ -345,17 +345,17 @@
     <tr><td>Job Description</td><td>{{ mainForm.value.previousEmployer.jobDescription }}</td></tr>
     <tr><td>Company Contact</td><td>{{ mainForm.value.previousEmployer.companyContact }}</td></tr>
     <tr><td>Supervisor Name</td><td>{{ mainForm.value.previousEmployer.supervisorName }}</td></tr>
-  </table>
+  </table> -->
 
   <!-- When PREVIOUS EMPLOYMENT = NO -->
-  <table class="summary-table" *ngIf="mainForm.value.hasPrevEmployment === 'no'">
+  <!-- <table class="summary-table" *ngIf="mainForm.value.hasPrevEmployment === 'no'">
     <tr><th colspan="2">Previous Employment Details</th></tr>
     <tr>
       <td>Description</td>
       <td>{{ mainForm.value.prevEmploymentDescription }}</td>
     </tr>
-  </table>
-</div>
+  </table> -->
+<!-- </div> -->
 
 
 </div>
